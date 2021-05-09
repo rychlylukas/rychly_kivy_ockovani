@@ -1,0 +1,86 @@
+#:import math.ceil math
+#:import utils kivy.utils
+
+BoxLayout:
+    orientation:'vertical'
+
+    MDToolbar:
+        title: 'Seznam očkovaných'
+        md_bg_color: utils.get_color_from_hex('#06c258')
+        specific_text_color: 1, 1, 1, 1
+
+    MDBottomNavigation:
+        id: navigation
+        panel_color: utils.get_color_from_hex('#06c258')
+
+        MDBottomNavigationItem:
+            name: 'screen 1'
+            text: 'Seznam očkovaných'
+            icon: 'card-bulleted'
+
+            DatabaseScreen:
+
+
+<OsobaContent>:
+    orientation: 'vertical'
+    size_hint_x: 1
+    size_hint_y: None
+    spacing: "12dp"
+    height: "200dp"
+
+    MDTextField:
+        hint_text: 'Zde napište jméno'
+        id: person_name
+        text: 'žádný záznam'
+        pos_hint: {'center_x': .5, 'center_y': .3}
+
+    MDDropDownItem:
+        hint_text: 'NÁZEV VAKCÍNY'
+        id: vakcina
+        pos_hint: {'center_x': .5, 'center_y': .7}
+        size_hint_x: 1
+        text: '1'
+        on_release: self.parent.menu_vakciny.open()
+
+    MDDropDownItem:
+        hint_text: 'NÁZEV POVOLÁNÍ'
+        id: povolani
+        pos_hint: {'center_x': .5, 'center_y': .7}
+        size_hint_x: 1
+        text: '1'
+        on_release: self.parent.menu_povolani.open()
+
+    MDTextField:
+        hint_text: 'Počet dávek'
+        id: pocet_davek_aktualne
+        text: 'jméno osoby'
+        pos_hint: {'center_x': .5, 'center_y': .9}
+
+
+<PridaniVakciny>:
+    orientation: 'vertical'
+    size_hint_x: 1
+    size_hint_y: None
+    height: "100dp"
+
+    MDTextField:
+        id: pridani_vakciny
+        text: 'Zadejte název vakcíny'
+        pos_hint: {'center_x': .5, 'center_y': .9}
+
+
+    MDTextField:
+        id: pridani_vakciny_davky
+        text: 'Zadejte celkový počet dávek'
+        pos_hint: {'center_x': .5, 'center_y': .9}
+
+<PridaniPovolani>:
+    orientation: 'vertical'
+    size_hint_x: 1
+    size_hint_y: None
+    height: "50dp"
+
+    MDTextField:
+        id: pridani_povolani
+        text: 'Zadejte název povolání'
+        pos_hint: {'center_x': .5, 'center_y': .9}
