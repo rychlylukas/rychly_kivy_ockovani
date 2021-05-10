@@ -13,10 +13,13 @@ class OsobaContent(BoxLayout):
     def __init__(self, id, *args, **kwargs):
         super().__init__(**kwargs)
 
-        person = {"id":"", "jmeno":"", "vakciny_id":"Vyber vakcínu", "povolani_id":"Vyber povolání", "pocet_davek_aktualne":"0"}
+        if id:
+            person = vars(app.seznam.database.read_by_id(id))
+        else:
+            person = {"id":"", "jmeno":"", "vakciny_id":"Vyber vakcínu", "povolani_id":"Vyber povolání", "pocet_davek_aktualne":"0"}
 
         self.ids.person_name.text = person['jmeno']
-        self.ids.pocet_davek_aktualne.text = person['pocet_davek_aktualne']
+        self.ids.pocet_davek_aktualne.text = str(person['pocet_davek_aktualne'])
 
 
         vakciny = app.seznam.database.read_vakciny()
@@ -27,7 +30,7 @@ class OsobaContent(BoxLayout):
             position="center",
             width_mult=5,
         )
-        self.ids.vakcina.set_item(person['vakciny_id'])
+        self.ids.vakcina.set_item(str(person['vakciny_id']))
 
 
         spovolani = app.seznam.database.read_povolani()
@@ -39,7 +42,7 @@ class OsobaContent(BoxLayout):
             width_mult=5,
         )
 
-        self.ids.povolani.set_item(person['povolani_id'])
+        self.ids.povolani.set_item(str(person['povolani_id']))
 
 
     def set_item(self, text_item):
